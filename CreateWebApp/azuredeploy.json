@@ -11,13 +11,7 @@
                 "description": "Specify a project name that is used to generate resource names."
             }
         },
-        "location": {
-            "type": "string",
-            "defaultValue": "north europe",
-            "metadata": {
-                "description": "Specify a location for the resources."
-            }
-        },
+
         "linuxFxVersion": {
             "type": "string",
             "defaultValue": "php|7.0",
@@ -27,6 +21,7 @@
         }
     },
     "variables": {
+        "location":"northeurope",
         "storageAccountName": "[concat(parameters('projectName'), uniqueString(resourceGroup().id))]",
         "webAppName": "[concat(parameters('projectName'), 'WebApp')]",
         "appServicePlanName": "[concat(parameters('projectName'), 'Plan')]"
@@ -46,7 +41,7 @@
                         "value": "[variables('storageAccountName')]"
                     },
                     "location": {
-                        "value": "[parameters('location')]"
+                        "value": "[variables('location')]"
                     }
                 }
             }
@@ -55,7 +50,7 @@
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2020-12-01",
             "name": "[variables('appServicePlanName')]",
-            "location": "[parameters('location')]",
+            "location": "[variables('location')]",
             "sku": {
                 "name": "B1",
                 "tier": "Basic",
@@ -75,7 +70,7 @@
             "type": "Microsoft.Web/sites",
             "apiVersion": "2020-12-01",
             "name": "[variables('webAppName')]",
-            "location": "[parameters('location')]",
+            "location": "[variables('location')]",
             "dependsOn": [
                 "resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))"
             ],
