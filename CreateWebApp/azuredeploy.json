@@ -13,7 +13,7 @@
         },
         "location": {
             "type": "string",
-            "defaultValue": "[resourceGroup().location]",
+            "defaultValue": "north europe",
             "metadata": {
                 "description": "Specify a location for the resources."
             }
